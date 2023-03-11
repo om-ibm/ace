@@ -1,0 +1,38 @@
+name: IBM App Connect Enterprise in Rancher
+description: IBM App Connect server Sample
+version: 1.0.0
+maintainer: om.upadhyay@ibm.xom
+
+category: Integration Server
+labels:
+  - web
+  - server
+
+icon: https://github.com/ot4i/ace-docker/blob/main/app_connect_light_256x256.png
+
+links:
+  - name: GitHub Repository
+    url: https://github.com/ot4i/ace-docker
+
+templates:
+- name: ACE Web Server
+  description: A Docker container running Integration server
+  questions:
+  - variable: port
+    label: Port
+    description: The port on which the Integration  server should listen
+    default: "7600"
+  - variable: image
+    label: Image
+    description: The Docker image to use for the Integration server
+    default: "ibmcom/ace-server"
+  catalogId: library
+  questionsRequired: true
+  files:
+  rancher-compose.yml: |-
+    version: '2'
+    services:
+      web:
+        image: "${image}"
+        ports:
+          - "${port}:7600"
